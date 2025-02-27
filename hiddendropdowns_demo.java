@@ -30,13 +30,14 @@ public class hiddendropdowns_demo {
         cd.findElement(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--main orangehrm-login-button']")).click();
         WebElement element1 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("My Info")));
         element1.click();
-        WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Nationality']/../../div[2]")));
+        WebElement element2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Nationality']/../../div[2]//div[1]//div[1]")));
        String before_click=element2.getText();
        System.out.println("Before click"+before_click);
         element2.click();
+        
         Actions act = new Actions(cd);
         
-        act.sendKeys(Keys.ENTER).perform();
+        
  
         String after_click=element2.getText();
         System.out.println("After click:"+after_click);
@@ -47,24 +48,18 @@ public class hiddendropdowns_demo {
         	System.out.println("Entereed while loop");
         	act.sendKeys(Keys.ARROW_DOWN).perform();
         	Thread.sleep(500);
-        	element2 = cd.findElement(By.xpath("//*[text()='Nationality']/../../div[2]"));
-
+       	element2 = cd.findElement(By.xpath("//*[text()='Nationality']/../../div[2]//div[1]//div[1]"));
         	String updated=element2.getText().trim();
         	System.out.println("updated:"+updated);
-        	if(updated.equals("American"))
+        	if(updated.contains("Argentinean") && updated != null && !updated.isEmpty())
         	{
+        		System.out.println("updated:"+updated);
         		System.out.println("print");
         		act.sendKeys(Keys.ENTER).perform();
         		System.out.println("The selected element is"+element2.getText());
         		flag=false;
-        		break;
-        		
+        		break;	
         	}
-        	
-        }
-       
-       
-
+        }     
         }   
-
 }
